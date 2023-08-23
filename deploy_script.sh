@@ -16,19 +16,24 @@
 #!/bin/bash
 
 # Server details
+#SERVER_IP=69.28.88.179
+#SSH_KEY_PATH=~/.ssh/id_ed25519
+#USERNAME=root
+#REMOTE_PATH=/
+
+#!/bin/bash
+
+# Server details
 SERVER_IP=69.28.88.179
-SSH_KEY_PATH=~/.ssh/id_ed25519
 USERNAME=root
+PASSWORD=qkPT5Y4dQSnCA9Ac
 REMOTE_PATH=/
 
-# Navigate to the remote directory
-# ssh -i $SSH_KEY_PATH $USERNAME@$SERVER_IP "cd $REMOTE_PATH"
-
 # Pull latest code from repository
-ssh -i $SSH_KEY_PATH $USERNAME@$SERVER_IP "cd $REMOTE_PATH && git pull origin main"
+sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "cd $REMOTE_PATH && git pull origin main"
 
 # Build Spring Boot application (adjust for Gradle or Maven)
-ssh -i $SSH_KEY_PATH $USERNAME@$SERVER_IP "cd $REMOTE_PATH && ./mvnw clean install"
+sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "cd $REMOTE_PATH && ./mvnw clean install"
 
 # Restart application (replace with your actual command)
-ssh -i $SSH_KEY_PATH $USERNAME@$SERVER_IP "sudo systemctl restart your-application-service-name"
+sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "sudo systemctl restart your-application-service-name"

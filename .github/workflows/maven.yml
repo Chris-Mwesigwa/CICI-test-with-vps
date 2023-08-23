@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  
+      - master  # Adjust to your main branch name
 
 jobs:
   deploy:
@@ -13,21 +13,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Add server to known_hosts
+      - name: Set up environment
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan 69.28.88.179 >> ~/.ssh/known_hosts
-
-      - name: Set up SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "PASSWORD=${{ secrets.SSH_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Deploy to Server
         run: |
           chmod +x deploy_script.sh
           ./deploy_script.sh
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
