@@ -29,6 +29,9 @@ USERNAME=root
 PASSWORD=qkPT5Y4dQSnCA9Ac
 REMOTE_PATH=/
 
+# Add server's SSH host key to known_hosts
+ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+
 # Pull latest code from repository
 sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "cd $REMOTE_PATH && git pull origin main"
 
@@ -36,4 +39,4 @@ sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "cd $REMOTE_PATH && git pull ori
 sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "cd $REMOTE_PATH && ./mvnw clean install"
 
 # Restart application (replace with your actual command)
-sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "sudo systemctl restart your-application-service-name"
+sshpass -p "$PASSWORD" ssh $USERNAME@$SERVER_IP "sudo systemctl cicd-test"
