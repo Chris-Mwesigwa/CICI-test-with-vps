@@ -17,7 +17,7 @@
 
 # Server details
 SERVER_IP=69.28.88.179
-SSH_KEY_PATH=~/.ssh/id_rsa
+SSH_KEY_PATH=~/.ssh/id_ed25519
 USERNAME=root
 REMOTE_PATH=/
 
